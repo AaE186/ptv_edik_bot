@@ -29,7 +29,8 @@ target_users = {
     ],
     "copy": [
         "@alexa_vasyaeva",
-        "@astor602"
+        "@astor602",
+        "aaaaa",
     ],
     "video": [
         "@Friderico_dourden",
