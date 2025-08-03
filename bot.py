@@ -17,7 +17,11 @@ target_users = {
     "photo": [
         "@miiglluna",
         "@derlegen",
-        "@FLYINGeyesOFFICIAL21"
+        "@FLYINGeyesOFFICIAL21",
+        "@aaaaa",
+        "@aaasfhjsfgjfgjaa",
+        "@aaaaassafa",
+
     ],
     "designer": [
         "@Ikc0ta",
