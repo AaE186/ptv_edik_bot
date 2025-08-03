@@ -38,7 +38,7 @@ target_users = {
     "admin": [
         "@Maksimon777"
     ],
-    "KatyaSimonova": [
+    "катясимонова": [
         "@maximoffn"
     ]
 }
@@ -62,7 +62,7 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     # Отслеживаем сообщения, которые начинаются с нужных команд
-    commands = ['@all', '@video', '@photo', '@designer', '@copy', '@admin', '@KatyaSimonova']
+    commands = ['@all', '@video', '@photo', '@designer', '@copy', '@admin', '@катясимонова']
 
     app.add_handler(
         MessageHandler(filters.TEXT & filters.Regex(r'^@(' + '|'.join(cmd.lstrip('@') for cmd in commands) + r')\b'),
