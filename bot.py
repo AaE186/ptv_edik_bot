@@ -33,6 +33,9 @@ target_users = {
     ],
     "admin": [
         "@Maksimon777"
+    ],
+    "Катя Симонова": [
+        "@maximoffn"
     ]
 }
 
