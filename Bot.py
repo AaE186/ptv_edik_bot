@@ -8,19 +8,62 @@ import os
 # ======== СПИСОК ПОЛЬЗОВАТЕЛЕЙ (оставляем как у тебя) =========
 target_users = {
     "all": [
-        "@nknwn86", "@r_shrlv", "@miiglluna", "@Linzhy13", "@Ikc0ta", "@derlegen",
-        "@Friderico_dourden", "@maximoffn", "@astor602", "@Nastya_Kosukhina", "@moarit",
-        "@vladysham", "@by_gelechka", "@Maksimon777", "@alexa_vasyaeva", '@yvslk',
-        "@merkovi", "@nastya3_56", "@yulshhhh", "@poliana_aa", "@Alkvlo", "@ssorelss",
-        "@min_sai", "@Tuturukhekhe", "@marieta_v7", "@b1ack_dah1ia", "@speculum_59",
-        "@D1am0nd_30", "@fjggkfg", "@Lancer_999", "@aa1esya"
+        "@nknwn86", #Эдик Абилов
+        "@r_shrlv", #Роял Ширалиев
+        "@miiglluna", #Милена
+        "@Linzhy13", #Анжелика Долгачева
+        "@Ikc0ta", #Иса
+        "@derlegen", #Катя Симонова
+        "@Friderico_dourden", #Федор Шаляпин
+        "@maximoffn", # Никита Максимов
+        "@astor602", # Антон Большенков
+        "@Nastya_Kosukhina", # Настя Косухина
+        "@moarit", #Злата Дрюпина
+        "@vladysham", #Влад Мельников
+        "@by_gelechka", #Ангелина Горелова
+        "@Maksimon777", #Новиков Максим
+        "@alexa_vasyaeva" # Александра Васяева
+        '@yvslk', #Яна Васильченко
+        "@merkovi", #Комендровская Мария
+        "@nastya3_56", #Анастасия Маргашова
+        "@yulshhhh", #Юлия Шулекина
+        "@poliana_aa", #Полина Хомутовская
+        "@Alkvlo", # Полина Яковлева
+        "@ssorelss", #Cофа Кузнецова
+        "@min_sai", #Вика Грачева
+        "@Tuturukhekhe", #Ира Греднева
+        "@marieta_v7", #Мариетта
+        "@b1ack_dah1ia", #Алена Костяева
+        "@speculum_59", #Владимир Передерин
+        "@D1am0nd_30", #Серега Цыглин
+        "@fjggkfg", #Витя Желуницын
+        "@Lancer_999", #Егор Брагин
+        "@aa1esya", #Алеся Алло
     ],
-    "photo": ["@miiglluna", "@derlegen", "@FLYINGeyesOFFICIAL21"],
-    "designer": ["@Ikc0ta", "@maximoffn"],
-    "copy": ["@alexa_vasyaeva", "@astor602", "aaaaa"],
-    "video": ["@Friderico_dourden", "@r_shrlv"],
-    "admin": ["@Maksimon777"],
-    "katyasimonova": ["@maximoffn"]
+    "photo": [
+        "@miiglluna",
+        "@derlegen",
+        "@FLYINGeyesOFFICIAL21"
+    ],
+    "designer": [
+        "@Ikc0ta",
+        "@maximoffn"
+    ],
+    "copy": [
+        "@alexa_vasyaeva",
+        "@astor602",
+        "aaaaa",
+    ],
+    "video": [
+        "@Friderico_dourden",
+        "@r_shrlv"
+    ],
+    "admin": [
+        "@Maksimon777"
+    ],
+    "katyasimonova": [
+        "@maximoffn"
+    ]
 }
 
 # ======== ФАЙЛ С ДЕДЛАЙНАМИ =========
@@ -140,16 +183,16 @@ async def check_deadlines(app: Application):
 
 # ======== ЗАПУСК =========
 def main():
-    BOT_TOKEN = "твой_токен"
+    BOT_TOKEN = "8265575566:AAEpgUGCGkzwaq99JGIaWko4g6y4mGW8ACA"
     app = Application.builder().token(BOT_TOKEN).build()
 
     # Основные команды
     commands = list(target_users.keys())
     app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r'^@(' + '|'.join(cmd for cmd in commands) + r')\b'), mention_category))
-    app.add_handler(CommandHandler("дедлайн", add_deadline))
-    app.add_handler(CommandHandler("дедлайны", list_deadlines))
-    app.add_handler(CommandHandler("удалить", delete_deadline))
-    app.add_handler(CommandHandler("редактировать", edit_deadline))
+    app.add_handler(CommandHandler("deadline", add_deadline))
+    app.add_handler(CommandHandler("deadlines", list_deadlines))
+    app.add_handler(CommandHandler("delete", delete_deadline))
+    app.add_handler(CommandHandler("edit", edit_deadline))
 
     # Планировщик
     scheduler = BackgroundScheduler()
