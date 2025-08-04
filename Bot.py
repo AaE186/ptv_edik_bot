@@ -1,11 +1,12 @@
-from telegram import Update
+import asyncio
+from telegram import Update, BotCommand
 from telegram.ext import Application, MessageHandler, CommandHandler, filters, ContextTypes
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import datetime, timedelta
+from datetime import datetime
 import json
 import os
 
-# ======== СПИСОК ПОЛЬЗОВАТЕЛЕЙ (оставляем как у тебя) =========
+# ======== СПИСОК ПОЛЬЗОВАТЕЛЕЙ =========
 target_users = {
     "all": [
         "@nknwn86", #Эдик Абилов
@@ -22,7 +23,7 @@ target_users = {
         "@vladysham", #Влад Мельников
         "@by_gelechka", #Ангелина Горелова
         "@Maksimon777", #Новиков Максим
-        "@alexa_vasyaeva" # Александра Васяева
+        "@alexa_vasyaeva", # Александра Васяева
         '@yvslk', #Яна Васильченко
         "@merkovi", #Комендровская Мария
         "@nastya3_56", #Анастасия Маргашова
@@ -181,25 +182,35 @@ async def check_deadlines(app: Application):
             except Exception as e:
                 print(f"Ошибка отправки: {e}")
 
+# ======== УСТАНОВКА КОМАНД ДЛЯ АВТОДОПОЛНЕНИЯ =========
+async def set_commands(application):
+    commands = [
+        BotCommand("дедлайн", "Добавить дедлайн"),
+        BotCommand("дедлайны", "Показать все дедлайны"),
+        BotCommand("удалить", "Удалить дедлайн"),
+        BotCommand("редактировать", "Редактировать дедлайн"),
+    ]
+    await application.bot.set_my_commands(commands)
+
 # ======== ЗАПУСК =========
-def main():
+async def main():
     BOT_TOKEN = "8265575566:AAEpgUGCGkzwaq99JGIaWko4g6y4mGW8ACA"
     app = Application.builder().token(BOT_TOKEN).build()
 
-    # Основные команды
+    await set_commands(app)
+
     commands = list(target_users.keys())
     app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r'^@(' + '|'.join(cmd for cmd in commands) + r')\b'), mention_category))
-    app.add_handler(CommandHandler("deadline", add_deadline))
-    app.add_handler(CommandHandler("deadlines", list_deadlines))
-    app.add_handler(CommandHandler("delete", delete_deadline))
-    app.add_handler(CommandHandler("edit", edit_deadline))
+    app.add_handler(CommandHandler("дедлайн", add_deadline))
+    app.add_handler(CommandHandler("дедлайны", list_deadlines))
+    app.add_handler(CommandHandler("удалить", delete_deadline))
+    app.add_handler(CommandHandler("редактировать", edit_deadline))
 
-    # Планировщик
     scheduler = BackgroundScheduler()
     scheduler.add_job(lambda: app.create_task(check_deadlines(app)), 'interval', hours=24)
     scheduler.start()
 
-    app.run_polling()
+    await app.run_polling()
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
