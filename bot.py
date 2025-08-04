@@ -140,7 +140,7 @@ async def check_deadlines(app: Application):
 
 # ======== ЗАПУСК =========
 def main():
-    BOT_TOKEN = "8265575566:AAHi2fIhmyBlFnL_NYHkQm8-26EAhFO-HFY"
+    BOT_TOKEN = "8265575566:AAEpgUGCGkzwaq99JGIaWko4g6y4mGW8ACA"
     app = Application.builder().token(BOT_TOKEN).build()
 
     # Основные команды
